@@ -116,7 +116,7 @@ core-$(CONFIG_EFI_STUB) += $(objtree)/drivers/firmware/efi/libstub/lib.a
 
 # Default target when executing plain make
 boot		:= arch/arm64/boot
-KBUILD_IMAGE	:= $(boot)/Image.gz
+KBUILD_IMAGE	:= $(boot)/Image
 KBUILD_DTBS	:= dtbs
 
 all:	Image.gz $(KBUILD_DTBS)
