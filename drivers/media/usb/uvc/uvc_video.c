@@ -1306,8 +1306,11 @@ static void uvc_video_decode_bulk(struct urb *urb, struct uvc_streaming *stream,
 	if (stream->bulk.header_size == 0 && !stream->bulk.skip_payload) {
 		do {
 			ret = uvc_video_decode_start(stream, buf, mem, len);
-			if (ret == -EAGAIN)
+			if (ret == -EAGAIN) {
+				if (stream->dev->quirks & UVC_QUIRK_APPEND_UVC_HEADER)
+					uvc_video_decode_data(stream, buf, stream->bulk.header, 256);
 				uvc_video_next_buffers(stream, &buf, &meta_buf);
+			}
 		} while (ret == -EAGAIN);
 
 		/* If an error occurred skip the rest of the payload. */
@@ -1341,8 +1344,11 @@ static void uvc_video_decode_bulk(struct urb *urb, struct uvc_streaming *stream,
 		if (!stream->bulk.skip_payload && buf != NULL) {
 			uvc_video_decode_end(stream, buf, stream->bulk.header,
 				stream->bulk.payload_size);
-			if (buf->state == UVC_BUF_STATE_READY)
+			if (buf->state == UVC_BUF_STATE_READY) {
+				if (stream->dev->quirks & UVC_QUIRK_APPEND_UVC_HEADER)
+					uvc_video_decode_data(stream, buf, stream->bulk.header, stream->bulk.header_size);
 				uvc_video_next_buffers(stream, &buf, &meta_buf);
+			}
 		}
 
 		stream->bulk.header_size = 0;
