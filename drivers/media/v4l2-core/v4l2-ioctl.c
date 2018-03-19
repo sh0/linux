@@ -1247,6 +1247,16 @@ static void v4l_fill_fmtdesc(struct v4l2_fmtdesc *fmt)
 	case V4L2_META_FMT_VSP1_HGO:	descr = "R-Car VSP1 1-D Histogram"; break;
 	case V4L2_META_FMT_VSP1_HGT:	descr = "R-Car VSP1 2-D Histogram"; break;
 
+	case V4L2_PIX_FMT_Y8:		descr = "8-bit Greyscale"; break;
+	case V4L2_PIX_FMT_RAW8:		descr = "8-bit Raw data"; break;
+	case V4L2_PIX_FMT_RW16:		descr = "16-bit Raw data"; break;
+	case V4L2_PIX_FMT_INVZ:		descr = "16 Depth"; break;
+	case V4L2_PIX_FMT_INVR:		descr = "16 Depth"; break;
+	case V4L2_PIX_FMT_INRI:		descr = "24 Depth/IR 16:8"; break;
+	case V4L2_PIX_FMT_INVI:		descr = "8 IR"; break;
+	case V4L2_PIX_FMT_RELI:		descr = "8 IR alternating on off illumination"; break;
+	case V4L2_PIX_FMT_W10:		descr = "10-bit Packed raw data"; break;
+
 	default:
 		/* Compressed formats */
 		flags = V4L2_FMT_FLAG_COMPRESSED;
