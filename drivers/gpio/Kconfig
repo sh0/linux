@@ -263,6 +263,13 @@ config GPIO_IOP
 
 	  If unsure, say N.
 
+config GPIO_IRQTS
+	tristate "GPIO timestamp stream support"
+	select GPIO_GENERIC
+	help
+	  Say yes here to support character device that provides GPIO pin change
+	  timestamps.
+
 config GPIO_LOONGSON
 	bool "Loongson-2/3 GPIO support"
 	depends on CPU_LOONGSON2 || CPU_LOONGSON3
